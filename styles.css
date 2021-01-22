@@ -1,0 +1,12 @@
+html{
+  background-color: #eee;
+}
+
+form{
+  max-width:800px;
+  display:grid;
+  grid-template-columns: 100px 1fr;
+}
+.hidden{
+  display:none;
+}
