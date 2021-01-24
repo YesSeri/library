@@ -4,8 +4,13 @@ html{
 
 form{
   max-width:800px;
+}
+.form-text-div{
   display:grid;
   grid-template-columns: 100px 1fr;
+}
+.form-other-div{
+  display: inline-block;
 }
 .hidden{
   display:none;

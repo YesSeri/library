@@ -10,24 +10,30 @@
   <h1>The library</h1>
   <table>
   </table>
-  <form>
-    <label for="fname">First name:</label>
-    <input type="text" id="fname" name="fname">
+  <form class='hidden'>
+    <div class='form-text-div'>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title">
 
-    <label for="lname">Last name:</label>
-    <input type="text" id="lname" name="lname">
+      <label for="author">Author:</label>
+      <input type="text" id="author" name="author">
+      
+      <label for="year">Year:</label>
+      <input type="number" id="year" name="year">
 
-
-    <label for="pages">Pages:</label>
-    <input type="number" id="pages" name="pages">
-
-    <input type="radio" id="read" name="read" value="read">
-    <label for="read">Read</label>
-
-    <input type="radio" id="unread" name="unread" value="unread">
-    <label for="unread">Unread</label>
+      <label for="pages">Pages:</label>
+      <input type="number" id="pages" name="pages">
+    </div>
+    <div class='form-other-div'>
+      <input type="radio" id="read" name="read-status">
+      <label for="read">Read</label>
+      <input type="radio" id="unread" name="read-status">
+      <label for="unread">Unread</label>
+    </div>
   </form>
-  <button id='book-button'>New Book</button>
+  <button id='new-book-button'>New Book</button>
+  <button id='hide-form-button' class='hidden'>Hide Form</button>
+  <button id='add-book-button' class='hidden'>Add Book</button>
   <script src="./scripts.js"></script>
 </body>
 

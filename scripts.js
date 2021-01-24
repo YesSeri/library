@@ -8,11 +8,8 @@ function Book(title, author, year, pages, read) {
   this.read = read
 }
 
-function addBookToLibrary() {
-  const book = new Book(title, author, year, pages, read)
-
+function addBookToLibrary(book) {
   library.push(book)
-
 }
 
 function createHeader(table) {
@@ -27,7 +24,7 @@ function createHeader(table) {
   }
 }
 function createRows(table) {
-  for (let book of library) {
+  for (const book of library) {
     let row = table.insertRow()
     for (key in book) {
       let cell = row.insertCell()
@@ -37,16 +34,49 @@ function createRows(table) {
   }
 }
 function displayBooks(table) {
+  table.innerHTML = ""
   createHeader(table)
   createRows(table)
 }
-function displayForm(){
+function displayForm() {
   const form = document.querySelector('form')
-  form.classList.toggle('hidden')
+  const newBookButton = document.querySelector('#new-book-button')
+  const addBookButton = document.querySelector('#add-book-button')
+  const hideFormButton = document.querySelector('#hide-form-button')
+  show(form)
+  hide(newBookButton)
+  show(hideFormButton)
+  show(addBookButton)
 }
-const table = document.querySelector('table')
-const bookButton = document.querySelector('#book-button')
+function submitForm() {
+  const book = createBook()
+  addBookToLibrary(book)
+}
 
-bookButton.addEventListener('click', function (event){
-  displayForm();
-})
+function createBook() {
+  const title = document.querySelector('#title').value
+  const author = document.querySelector('#author').value
+  const year = document.querySelector('#year').value
+  const pages = document.querySelector('#pages').value
+  const read = document.querySelector('#read').checked
+  return new Book(title, author, year, pages, read)
+}
+function hide(el) {
+  el.classList.add('hidden')
+}
+function show(el) {
+  el.classList.remove('hidden')
+}
+function addEventListeners() {
+  const newBookButton = document.querySelector('#new-book-button')
+  const addBookButton = document.querySelector('#add-book-button')
+  newBookButton.addEventListener('click', function (event) {
+    displayForm();
+  })
+  addBookButton.addEventListener('click', function (event) {
+    submitForm();
+    const table = document.querySelector('table')
+    displayBooks(table)
+  })
+}
+addEventListeners();
