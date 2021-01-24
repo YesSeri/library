@@ -1,4 +1,4 @@
-let library = getStoredData()
+const library = getStoredData()
 
 if (library.length !== 0){
   displayBooks();
@@ -21,12 +21,14 @@ function Book(title, author, year, pages, read) {
 
 function addBookToLibrary(book) {
   library.push(book)
-  console.log({library: library})
+  saveLibraryToLocalStorage();
+}
+function saveLibraryToLocalStorage(){
   window.localStorage.setItem('library', JSON.stringify(library))
 }
 
 function createHeader(table) {
-  const headers = ["Title", "Author", "Year", "Pages", "Read"]
+  const headers = ["Title", "Author", "Year", "Pages", "Read", "Delete"]
   let thead = table.createTHead();
   let row = thead.insertRow();
   for (let key of headers) {
@@ -41,6 +43,14 @@ function createRows(table) {
     let row = table.insertRow()
     for (key in book) {
       let cell = row.insertCell()
+      if (key === 'read') {
+        cell.addEventListener('click', () => {
+          book.read = true;
+          displayBooks();
+          saveLibraryToLocalStorage();
+          console.log('clicked read cell')
+        })
+      }
       let text = document.createTextNode(book[key])
       cell.appendChild(text)
     }
