@@ -1,5 +1,16 @@
-let library = [];
+let library = getStoredData()
 
+if (library.length !== 0){
+  displayBooks();
+}
+function getStoredData(){
+  const storage = JSON.parse(window.localStorage.getItem('library'))
+  let library = [];
+  if (storage !== null) {
+    library = storage;
+  }
+  return library
+}
 function Book(title, author, year, pages, read) {
   this.title = title
   this.author = author
@@ -10,6 +21,8 @@ function Book(title, author, year, pages, read) {
 
 function addBookToLibrary(book) {
   library.push(book)
+  console.log({library: library})
+  window.localStorage.setItem('library', JSON.stringify(library))
 }
 
 function createHeader(table) {
@@ -33,7 +46,8 @@ function createRows(table) {
     }
   }
 }
-function displayBooks(table) {
+function displayBooks() {
+  const table = document.querySelector('table')
   table.innerHTML = ""
   createHeader(table)
   createRows(table)
@@ -75,8 +89,7 @@ function addEventListeners() {
   })
   addBookButton.addEventListener('click', function (event) {
     submitForm();
-    const table = document.querySelector('table')
-    displayBooks(table)
+    displayBooks()
   })
 }
 addEventListeners();
